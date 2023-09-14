@@ -9,6 +9,7 @@ import (
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 var Db *gorm.DB
@@ -26,20 +27,23 @@ func DatabaseInit(){
 		log.Fatalf("Some error occured. Err: %s", err)
 	}
 
-	name := os.Getenv("DB_NAME")
-	host := os.Getenv("DB_HOST")
-	user := os.Getenv("DB_USER")
-	pass := os.Getenv("DB_PASS")
-	port := os.Getenv("DB_PORT")
+	name := os.Getenv("POSTGRES_DB")
+	host := os.Getenv("POSTGRES_HOST")
+	user := os.Getenv("POSTGRES_USER")
+	pass := os.Getenv("POSTGRES_PASSWORD")
+	port := os.Getenv("POSTGRES_PORT")
+
+	fmt.Println("name: ", name)
 
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable client_encoding=UTF8 TimeZone=Africa/Nairobi", host, user, pass, name, port)
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
+
     if err != nil {
         log.Fatalln(err)
     }
-
+	db.Logger = logger.Default.LogMode(logger.Info)
   db.AutoMigrate(&models.Customer{}, &models.Orders{})
 
   Database = DbInstance{Db: db}
