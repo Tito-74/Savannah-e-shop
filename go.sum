@@ -1,3 +1,7 @@
+github.com/AfricastalkingLtd/africastalking-go v0.0.0-20190314130600-8bb53dce16a2 h1:LbHTjhWYHuiaklce3GWaCTvPAy4fdetnqcLi78o+dD4=
+github.com/AfricastalkingLtd/africastalking-go v0.0.0-20190314130600-8bb53dce16a2/go.mod h1:e7RLE4s2R+zEEMaD6AN71aPDr/qrnE+LkIBLnDvmhM8=
+github.com/AndroidStudyOpenSource/africastalking-go v0.0.0-20200515172509-94a151ad63fe h1:uXPOrFHjkAP3NgAfOXgDwuRa3nkX3w71jT7zYGJFvFk=
+github.com/AndroidStudyOpenSource/africastalking-go v0.0.0-20200515172509-94a151ad63fe/go.mod h1:1oj0QW+1duBl8Ono/Gg2NhXpu8fAqFrquBejPq2qy14=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/gorilla/mux v1.8.0 h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI=

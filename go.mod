@@ -10,6 +10,8 @@ require (
 )
 
 require (
+	github.com/AfricastalkingLtd/africastalking-go v0.0.0-20190314130600-8bb53dce16a2 // indirect
+	github.com/AndroidStudyOpenSource/africastalking-go v0.0.0-20200515172509-94a151ad63fe // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
 	github.com/jackc/pgx/v5 v5.3.1 // indirect

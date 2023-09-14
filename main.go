@@ -15,7 +15,7 @@ import (
 func main() {
 	database.DatabaseInit()
 	router := mux.NewRouter()
-
+	// routes 
 	router.HandleFunc("/", controller.HelloWorld).Methods(http.MethodGet)
 	router.HandleFunc("/customer",  controller.CreateCustomerDetails).Methods(http.MethodPost)
 	router.HandleFunc("/order", controller.CreateOrderDetails).Methods(http.MethodPost)
