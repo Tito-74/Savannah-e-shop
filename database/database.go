@@ -20,7 +20,7 @@ type DbInstance struct {
 
 var Database DbInstance
 
-func DatabaseInit(){
+func DatabaseConnect(){
 
 	err := godotenv.Load(".env")
 	if err != nil {
@@ -46,5 +46,5 @@ func DatabaseInit(){
 	db.Logger = logger.Default.LogMode(logger.Info)
   db.AutoMigrate(&models.Customer{}, &models.Orders{})
 
-  Database = DbInstance{Db: db}
+   Database = DbInstance{Db: db}
 }
