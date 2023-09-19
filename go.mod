@@ -1,6 +1,6 @@
 module github.com/Tito-74/Savannah-e-shop
 
-go 1.18
+go 1.19
 
 require (
 	github.com/coreos/go-oidc v2.2.1+incompatible

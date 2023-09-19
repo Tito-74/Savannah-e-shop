@@ -24,8 +24,6 @@ import (
 	// "gorm.io/gorm"
 )
 
-
-
 func main() {
 	err := godotenv.Load(".env")
 	if err != nil {
@@ -42,6 +40,8 @@ func main() {
 
 	clientID := os.Getenv("KEYCLOAK_CLIENTID")
 	clientSecret := os.Getenv("KEYCLOAK_CLIENT_SECRET")
+
+	fmt.Println("secret", clientSecret)
 
 	redirectURL := os.Getenv("KEYCLOAK_REDIRECT_URL")
 	// Configure an OpenID Connect aware OAuth2 client.
@@ -83,12 +83,11 @@ func main() {
 		}
 	})
 
-
 	http.HandleFunc("/customer", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != "POST"{
-		w.WriteHeader(http.StatusMethodNotAllowed)
-		w.Write([]byte(http.StatusText(http.StatusMethodNotAllowed)))
-		return
+		if r.Method != "POST" {
+			w.WriteHeader(http.StatusMethodNotAllowed)
+			w.Write([]byte(http.StatusText(http.StatusMethodNotAllowed)))
+			return
 		}
 		database := database.Database.Db
 		rawAccessToken := r.Header.Get("Authorization")
@@ -112,39 +111,39 @@ func main() {
 			return
 		}
 
-	body, err := io.ReadAll(r.Body)
+		body, err := io.ReadAll(r.Body)
 
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte(http.StatusText(http.StatusBadRequest)))
-		return
-	}
-
-	var customer models.Customer
-	json.Unmarshal(body, &customer)
-
-	// add to the customers table
-	err = database.Debug().Create(&customer).Error
-	if err != nil{
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(http.StatusText(http.StatusInternalServerError)))
-		return
-	}
-
-	http.HandleFunc("/order", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != "POST"{
-			w.WriteHeader(http.StatusMethodNotAllowed)
-			w.Write([]byte(http.StatusText(http.StatusMethodNotAllowed)))
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write([]byte(http.StatusText(http.StatusBadRequest)))
 			return
+		}
+
+		var customer models.Customer
+		json.Unmarshal(body, &customer)
+
+		// add to the customers table
+		err = database.Debug().Create(&customer).Error
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte(http.StatusText(http.StatusInternalServerError)))
+			return
+		}
+
+		http.HandleFunc("/order", func(w http.ResponseWriter, r *http.Request) {
+			if r.Method != "POST" {
+				w.WriteHeader(http.StatusMethodNotAllowed)
+				w.Write([]byte(http.StatusText(http.StatusMethodNotAllowed)))
+				return
 			}
 			// database := database.Database.Db
 			rawAccessToken := r.Header.Get("Authorization")
-	
+
 			if rawAccessToken == "" {
 				http.Redirect(w, r, oauth2Config.AuthCodeURL(state), http.StatusFound)
 				return
 			}
-	
+
 			parts := strings.Split(rawAccessToken, " ")
 			if len(parts) != 2 {
 				fmt.Print("parts: ", len(parts))
@@ -152,48 +151,47 @@ func main() {
 				return
 			}
 			_, err := verifier.Verify(ctx, parts[1])
-	
+
 			if err != nil {
 				fmt.Print("error: ", err)
 				http.Redirect(w, r, oauth2Config.AuthCodeURL(state), http.StatusFound)
 				return
 			}
 
-	body, err := io.ReadAll(r.Body)
+			body, err := io.ReadAll(r.Body)
 
-	if err != nil {
-		log.Fatalln(err)
-	}
+			if err != nil {
+				log.Fatalln(err)
+			}
 
-	var order models.Orders
-	json.Unmarshal(body, &order)
+			var order models.Orders
+			json.Unmarshal(body, &order)
 
-	// Append to the order table
-	if result := database.Create(&order); result.Error != nil {
-		fmt.Println(result.Error)
-	}
-	// send message
-	var customer models.Customer
-	database.Find(&customer, "id =?", order.CustomerId)
-	phone := customer.Phone
-	name := customer.Name
-	res := SendMessage(name, phone, &order)
+			// Append to the order table
+			if result := database.Create(&order); result.Error != nil {
+				fmt.Println(result.Error)
+			}
+			// send message
+			var customer models.Customer
+			database.Find(&customer, "id =?", order.CustomerId)
+			phone := customer.Phone
+			name := customer.Name
+			res := SendMessage(name, phone, &order)
 
-	log.Println("response", res)
+			log.Println("response", res)
 
-	// Send a 201 created response
-	w.Header().Add("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode("Created successfully")
+			// Send a 201 created response
+			w.Header().Add("Content-Type", "application/json")
+			w.WriteHeader(http.StatusOK)
+			json.NewEncoder(w).Encode("Created successfully")
 
-	})
+		})
 
 		// Send a 201 created response
 		w.Header().Add("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode("Created successfully")
 	})
-
 
 	http.HandleFunc("/demo/callback", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Query().Get("state") != state {

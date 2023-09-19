@@ -1,8 +1,26 @@
-FROM golang:1.21.1
+# use official Golang image
+FROM golang:1.19
+
+# RUN apk update
+# RUN apk upgrade
+# RUN apk add --no-cache libc6-compat
+
+# set working directory
 WORKDIR /app
-# RUN go install github.com/cosmtrek/air@latest
-COPY . .
+
+COPY go.mod go.sum ./
+# Copy the source code
+COPY . ./
+
+# Download and install the dependencies
 RUN go mod tidy
-RUN go build -o savannah .
-EXPOSE 3000
+RUN ls
+# Build the Go app
+RUN CGO_ENABLED=0 GOOS=linux go build -o /savannah
+# RUN go build -o savannah .
+
+#EXPOSE the port
+EXPOSE 8181
+
+# Run the executable
 CMD ["./savannah"]

@@ -35,9 +35,12 @@ func DatabaseConnect(){
 
 	fmt.Println("name: ", name)
 
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable client_encoding=UTF8 TimeZone=Africa/Nairobi", host, user, pass, name, port)
+	dbURL := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable client_encoding=UTF8 TimeZone=Africa/Nairobi", host, user, pass, name, port)
+	// fmt.Sprintf("postgres://%v:%v@%v:%v/%v", user, pass,host,port,name)
+	fmt.Println("dbURL: ", dbURL)
+	// fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable client_encoding=UTF8 TimeZone=Africa/Nairobi", host, user, pass, name, port)
 
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(dbURL), &gorm.Config{})
 
 
     if err != nil {
