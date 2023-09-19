@@ -23,6 +23,6 @@ jobs:
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         application_name: Savannah
         environment_name: Savannah-env
-        version_label: savannah123
+        version_label: 125783
         region: "us-east-1"
         deployment_package: deploy.zip
