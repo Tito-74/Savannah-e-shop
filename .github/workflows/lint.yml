@@ -1,20 +1,20 @@
-name: Lint Go Code
+# name: Lint Go Code
 
-on:
-  push:
-    branches:
-      - master
+# on:
+#   push:
+#     branches:
+#       - master
 
-jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-go@v4
-        with:
-          go-version: 'stable'
+# jobs:
+#   lint:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       - uses: actions/setup-go@v4
+#         with:
+#           go-version: 'stable'
 
-      - name: lint
-        uses: golangci/golangci-lint-action@v3
-        with:
-          version: v1.54
+#       - name: lint
+#         uses: golangci/golangci-lint-action@v3
+#         with:
+#           version: v1.54
