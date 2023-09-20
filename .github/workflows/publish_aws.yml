@@ -1,0 +1,18 @@
+name: CD pipeline
+
+on:
+  workflow_run:
+    workflows: ["CI build"]
+    types:
+      - completed
+
+jobs:
+  publish:
+    runs-on: self-hosted
+    steps:
+    - name: Pull docker image
+      run: sudo docker pull  lankip/savannah-image:v1
+    - name: Delete old docker container
+      run: docker rm -f savannah-image-container || true
+    - name: Run new container 
+    - run: sudo docker run -d -p 8181:8181 --name savannah-image-container lankip/savannah-image
