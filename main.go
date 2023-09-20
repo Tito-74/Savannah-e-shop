@@ -59,8 +59,6 @@ func main() {
 	oidcConfig := &oidc.Config{
 		ClientID: clientID,
 	}
-
-	
 	verifier := provider.Verifier(oidcConfig)
 
 	http.HandleFunc("/token", func(w http.ResponseWriter, r *http.Request) {
