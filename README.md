@@ -11,7 +11,7 @@ This is a Go web application for the Savannah e-Shop project, built using the st
 ## Installation
 To run this application locally, follow this step:
 1. Clone the repository:
-    - git clone git@github.com:Tito-74/Savannah-e-shop.git
+    - < git clone git@github.com:Tito-74/Savannah-e-shop.git >
 
 2. Create a .env file in the root directory and set the following environment variables:
     * KEYCLOAK_CONFIG_URL=<Keycloak Configuration URL>
@@ -19,7 +19,6 @@ To run this application locally, follow this step:
     * KEYCLOAK_CLIENT_SECRET=<Your Keycloak Client Secret>
     * KEYCLOAK_REDIRECT_URL=<Your Redirect URL>
     * KEYCLOAK_STATE=<Your State>
-    * PORT=<Port for the application>
     * AFRICASTALKING_API_KEY=<Your Africa's Talking API Key>
     * AFRICASTALKING_USERNAME=<Your Africa's Talking Username>
 3. Install dependencies:
@@ -33,6 +32,7 @@ To run this application locally, follow this step:
 
 6. Run the application:
    - go run main.go
+
 
 
 ## Routes
