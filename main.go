@@ -6,22 +6,18 @@ import (
 	"fmt"
 	"os"
 
-	// "fmt"
 	"io"
 	"log"
 	"net/http"
 
 	"strings"
 
-	// "github.com/Tito-74/Savannah-e-shop/controller"
 	"github.com/Tito-74/Savannah-e-shop/database"
 	"github.com/Tito-74/Savannah-e-shop/models"
 	"github.com/joho/godotenv"
 
 	oidc "github.com/coreos/go-oidc"
-	// "github.com/gorilla/mux"
 	"golang.org/x/oauth2"
-	// "gorm.io/gorm"
 )
 
 func main() {
