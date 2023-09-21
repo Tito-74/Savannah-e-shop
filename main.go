@@ -132,7 +132,6 @@ func main() {
 				w.Write([]byte(http.StatusText(http.StatusMethodNotAllowed)))
 				return
 			}
-			// database := database.Database.Db
 			rawAccessToken := r.Header.Get("Authorization")
 
 			if rawAccessToken == "" {
