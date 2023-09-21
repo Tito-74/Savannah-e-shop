@@ -13,7 +13,7 @@ To run this application locally, follow this step:
 1. Clone the repository:
     - < git clone git@github.com:Tito-74/Savannah-e-shop.git >
 
-2. Create a .env file in the root directory and set the following environment variables:
+2. Create a savannah.env file in the root directory and set the following environment variables:
     * KEYCLOAK_CONFIG_URL=<Keycloak Configuration URL>
     * KEYCLOAK_CLIENTID=<Your Keycloak Client ID>
     * KEYCLOAK_CLIENT_SECRET=<Your Keycloak Client Secret>
