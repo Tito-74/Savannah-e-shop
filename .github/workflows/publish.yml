@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the docker image
-      run: docker build . --file Dockerfile --tag lankip/savannah-image:v2
+      run: docker build . --file Dockerfile --tag lankip/savannah-image:v3
 
 
     - name: Publish to Registry
@@ -20,7 +20,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: push to Dockerhub
-      run: docker push lankip/savannah-image:v2
+      run: docker push lankip/savannah-image:v3
      
 # jobs:
 #   deploy:

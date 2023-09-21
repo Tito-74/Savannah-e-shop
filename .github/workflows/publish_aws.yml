@@ -12,8 +12,8 @@ jobs:
 
     steps:
     - name: Pull docker container
-      run: sudo docker pull  lankip/savannah-image:v2
+      run: sudo docker pull  lankip/savannah-image:v3
     - name: Delete old docker container
       run: docker rm -f savannah-image-container || true
     - name: Run new container 
-      run: sudo docker run -d -p 8181:8181 --name savannah-image-container lankip/savannah-image:v2
+      run: sudo docker run -d -p 8181:8181 --name savannah-image-container lankip/savannah-image:v3
