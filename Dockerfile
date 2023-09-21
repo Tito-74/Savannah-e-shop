@@ -23,4 +23,4 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o /savannah
 EXPOSE 8181
 
 # Run the executable
-CMD ["./savannah"]
+CMD ["./Savannah-e-shop"]
