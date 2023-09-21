@@ -36,6 +36,7 @@ To run this application locally, follow this step:
 
 
 ## Routes
+* Access Endpoint using: [http://34.203.192.177:8181/{route}]
 - /token: Endpoint for handling access tokens and authentication with Keycloak.
 - /customer: Create and manage customer records (HTTP POST).
 - /order: Create and manage order records (HTTP POST).
